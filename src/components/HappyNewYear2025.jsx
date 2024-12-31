@@ -38,7 +38,6 @@ const HappyNewYear2025 = () => {
         clearInterval(interval);
         setIsNewYear(true);
         play(); // Trigger sound on countdown end
-        handlePlaySound();
       } else {
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
         const hours = Math.floor(
@@ -51,8 +50,13 @@ const HappyNewYear2025 = () => {
         setCountdown(`${days}d ${hours}h ${minutes}m ${seconds}s`);
       }
     }, 1000);
-    return () => clearInterval(interval);
-  }, [play]);
+
+    // Cleanup to stop the sound when the component is unmounted
+    return () => {
+      clearInterval(interval);
+      stop(); // Stop the sound if the component unmounts
+    };
+  }, [play, stop]);
 
   // Debugging button for triggering sound manually
   const handlePlaySound = () => {
