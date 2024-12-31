@@ -33,7 +33,7 @@ const HappyNewYear2025 = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
 
-      if (difference <= 0) {
+      if (difference > 0) {
         clearInterval(interval);
         setIsNewYear(true);
         play(); // Trigger sound on countdown end
@@ -57,7 +57,7 @@ const HappyNewYear2025 = () => {
     play();
   };
 
-  const shareUrl = "https://yourdomain.com/happynewyear2025"; // Update with your actual domain
+  const shareUrl = "https://happy-new-year-hoon.onrender.com"; // Update with your actual domain
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-700 flex flex-col items-center justify-center text-white p-6 relative">
