@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Confetti from "react-confetti";
+import { Helmet } from "react-helmet";
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -33,10 +34,11 @@ const HappyNewYear2025 = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
 
-      if (difference > 0) {
+      if (difference <= 0) {
         clearInterval(interval);
         setIsNewYear(true);
         play(); // Trigger sound on countdown end
+        handlePlaySound();
       } else {
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
         const hours = Math.floor(
@@ -61,6 +63,10 @@ const HappyNewYear2025 = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-700 flex flex-col items-center justify-center text-white p-6 relative">
+      {/* Helmet for setting page title */}
+      <Helmet>
+        <title>Happy New Year 2025</title>
+      </Helmet>
       {/* Confetti Animation */}
       <Confetti
         width={dimensions.width}
@@ -73,12 +79,13 @@ const HappyNewYear2025 = () => {
       <div className="text-center">
         {isNewYear ? (
           <>
-            <h1 className="text-6xl md:text-8xl font-bold mb-4 animate-bounce">
+            <h1 className="text-6xl md:text-8xl font-bold mb-4 animate-bounce font-serif">
               🎉 Happy New Year 2025 🎉
             </h1>
-            <p className="text-lg md:text-2xl mt-4 mb-8 font-medium">
-              "Cheers to a new year and another chance to make your dreams come
-              true."
+            <p className="text-lg md:text-2xl mt-4 mb-8 font-medium font-mono">
+              "Each new year is a blank book with 365 pages waiting to be
+              written. Let us fill them with purpose, passion and the pursuit of
+              our dreams, for the story is ours to create"
             </p>
           </>
         ) : (
